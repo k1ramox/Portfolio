@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block js %}
+<script src="static/js/addpet.js" defer></script>
+{% endblock %}
+
+{% block title %}
+    Add a Pet
+{% endblock %}
+
+{% block main %}
+    <div class="main-account-setup-container">
+        <div class="account-setup-container">
+            <h1>Add Your Beloved Pet</h1>
+            <form id="add_pet_id_selector" action="/add_pet" method="post" enctype="multipart/form-data">
+                <div class="add-pet-container">
+                    <input class="pet_name" name="petname" type="text" placeholder="Pet Name">
+                    <input class="pet_species" name="species" type="text" placeholder="Species (e.g. dog, cat, etc...)">
+                    <div class="add-pet-choosefile">
+                        <div>Picture of your pet: </div>
+                        <input class="input-pet-profile" name="file" type="file" placeholder="test"> 
+                    </div>
+                    <input class="add-pet-button" name="add-pet-button" type="submit" value="Add Pet" placeholder="Add pet">
+                </div>
+            </form>
+            <p style="display: flex; color: black; font-weight: bold;" class="addpet_feedback"></p>
+        </div>  
+    </div>
+{% endblock %}

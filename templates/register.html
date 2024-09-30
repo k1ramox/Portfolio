@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block js %}
+<script src="static/js/register.js" defer></script>
+{% endblock %}
+
+{% block title %}
+    PPL - Register
+{% endblock %}
+
+{% block main %}
+    <div class="main-register-form-container">
+        <div class="register-form-container">
+            <form id="register_form" action="/register" method="post">
+                <div class="register-header">
+                    <h1>Register</h1>
+                </div>
+                <div class="register-input-field">
+                    <input id="username_register" autocomplete="off" class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
+                </div>
+                <div class="register-input-field">
+                    <input id="password_register" autocomplete="off" class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
+                </div>
+                <div class="register-input-field">
+                    <input id="confirm_register" autocomplete="off" class="form-control mx-auto w-auto" name="confirm" placeholder="Confirm Password" type="password">
+                </div>
+                <div class="register-button-field">
+                        <button class="btn btn-dark" type="submit">Register</button>
+                </div>
+                <div class="register-apology"></div>
+            </form>        
+            <a class="already-have-an-account" href="/login">Already have an account?</a>
+        </div>
+    </div>
+    <hr>
+{% endblock %}

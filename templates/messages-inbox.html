@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Inbox Messages
+{% endblock %}
+
+{% block main %}
+<div class="messages-container-outer">
+    <div class="messages-container-inner">
+        <div class="messages-sidebar">
+            <div class="inbox-icon-container">
+                <div class="image-inbox-container">
+                    <img class="image-messages-icon" src="static/mail-inbox-app.png">
+                </div>
+                <div class="text-inbox-container">
+                    Inbox
+                </div>
+            </div>
+            <a href="/messages-sent">
+            <div class="inactive-icon-container">
+                <div class="image-inbox-container">
+                    <img class="image-messages-icon" src="static/sent-icon.png">
+                </div>
+                <div class="text-inbox-container">
+                    Sent
+                </div>
+            </div>
+            </a>
+        </div>
+        <div class="messages-main-container">
+            <div class="messages-list-inbox-container">
+                {% if not messages_from %}
+                    <h3>There’s nothing to show here because no one has messaged you yet.</h3>
+                {% endif %}
+                {% for froms in messages_from %}
+                <div class="message-list-box">
+                    <div class="message-from-container">
+                        FROM
+                    </div>
+                    <div class="message-list-box-middle">
+                        <div class="from-profile-container">
+                            <img class="from-profile-pic" src="static/images_profiles/{{ froms['sender_profile_pic'] }}">
+                        </div>
+                        <div class="from-message-container">
+                            {{ froms['text_message'] }}
+                        </div>
+                    </div>
+                    <div class="message-list-box-bottom">
+                        <div class="from-name-container">
+                            <strong>{{ froms['sender_name'] }}</strong>
+                        </div>
+                        <div class="from-date-container">
+                            {{ froms['time'] }}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

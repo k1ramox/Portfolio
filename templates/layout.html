@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+        <link href="/static/paw.png" rel="icon">
+
+        <link href="/static/styles.css" rel="stylesheet">
+
+        {% block js %}
+        {% endblock %}
+
+        <title>{% block title %}{% endblock %}</title>
+
+    </head>
+
+    <body>
+        {% if session["user_id"] %}
+        <div class="top-section">
+            <div class="logo-container">
+                <img class="text-logo" src="static/text-logo.png">
+            </div>
+            <div class="search-container">
+                <form action="/search" method="get">
+                    <input id="search-field" type="search" name="q" value="{{ retain_searched_text }}" placeholder="Search someone...">
+                    <input id ="search-submit-button" type="submit" value="Search">
+                </form>
+            </div>
+            <div class="nav-container">
+                <a class="navbar-container" href="/">
+                    <img class="nav-image" src="static/pawtry.png">
+                    <div class="nav-button">Home</div>
+                </a>
+                <a class="navbar-container" href="/profile?n={{ session['username'] }}">
+                    <img class="nav-image" src="static/pawtry.png">
+                    <div class="nav-button">My Profile</div>
+                </a>
+                <a class="navbar-container" href="/messages-inbox">
+                    <img class="nav-image" src="static/pawtry.png">
+                    <div class="nav-button">Messages</div>
+                </a>
+                <a class="navbar-container" href="/account">
+                    <img class="nav-image" src="static/pawtry.png">
+                    <div class="nav-button">Account</div>
+                </a>
+                <a class="navbar-container" href="/logout">
+                    <img class="nav-image" src="static/pawtry.png">
+                    <div class="nav-button">Log-out</div>
+                </a>
+            </div>
+        </div>
+        {% else %}
+        <div class="top-section">
+            <div class="logo-container">
+                <img class="text-logo" src="static/text-logo.png">
+            </div>
+            <div class="nav-container">
+                <a class="navbar-container" href="/">
+                    <img class="nav-image" src="static/pawtry.png">
+                    <div class="nav-button">Home</div>
+                </a>
+                <a class="navbar-container" href="/login">
+                    <img class="nav-image" src="static/pawtry.png">
+                    <div class="nav-button">Login</div>
+                </a>
+                <a class="navbar-container" href="/register">
+                    <img class="nav-image" src="static/pawtry.png">
+                    <div class="nav-button">Register</div>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+        
+
+        <main class="main-from-layout">
+            {% block main %}{% endblock %}
+        </main>
+
+        <footer class="mb-5" style="padding: 0px;">
+            <p>&copy; 2024 <a class="footer-name-link" title="Redirect to his facebook profile." href="https://www.facebook.com/k1ramox/">Ken Ian Marañon.</a> All rights reserved.</p>
+        </footer>
+    </body>
+</html>

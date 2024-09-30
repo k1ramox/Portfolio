@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Update Profile Picture
+{% endblock %}
+
+{% block main %}
+    <div class="main-account-setup-container">
+        <div class="account-setup-container">
+            <h1>Update Profile Picture</h1>
+            <form action="/update_profile" method="post" enctype="multipart/form-data">
+                <div class="image-profile-container">
+                    <img class="image-profile-setup" src="{{ url_for('static', filename=profile_picture) }}">
+                </div>
+                <div class="image-choosefile-container">
+                    <input type="file" name="file">
+                    <input type="submit" value="Upload">
+                </div>
+            </form>
+            <p style="color: red; font-weight: bold; margin-top: 5px;">{% if session["error_fileupload"] %}Invalid type of file. (Should be jpg or jpeg){% endif %}</p>
+        </div>
+    </div>
+{% endblock %}

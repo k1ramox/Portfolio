@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block js %}
+<script src="static/js/login.js" defer></script>
+{% endblock %}
+
+{% block title %}
+    PPL - Log in
+{% endblock %}
+
+{% block main %}
+    <div class="main-login-page">
+        <div class="left-section">
+            <div class="login-form-container">
+                <form id="form_login" action="/login" method="post">
+                        <div>
+                            <h1>Welcome back!</h1>
+                        </div>
+                        <div class="username-container">
+                            <input id="username_login" autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
+                        </div>
+                        <div class="password-container">
+                            <input id="password_login" class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
+                        </div>
+                        <div class="button-container">
+                            <button class="btn btn-dark" type="submit">Log In</button>
+                        </div>
+                </form>
+                <div class="login-apology">{% if session["wrong_credentials"] %}Wrong credentials.{% endif %}</div>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="login-video-container">
+                <h3>Credits to <a href="https://www.youtube.com/@KidsAcademyCom">KidsAcademyCom</a> for this video.</h3>
+                <video class="login-video" controls>
+                    <source src="static/login-pet-video.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+    <hr>
+{% endblock %}

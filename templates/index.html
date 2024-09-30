@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+
+{% block title %}
+   {% if session["user_id"] %}
+        Home
+   {% else %}
+        Welcome To Pet Lovers' Lounge
+   {% endif %}
+{% endblock %}
+
+{% block main %}
+    {% if session["user_id"] %}
+    <div class="log-ined-main-container">
+        <div class="index-leftsection-container">
+            <div class="index-tops-header">
+                <h1>Top 3 Love Token Holders</h1>
+            </div>
+            {% if top1 %}
+            <div class="top-1">
+                <a href="/profile?n={{top1['username']}}" class="top1-imagecontainer">
+                    <img class="top1-imageprofile" src="static/images_profiles/{{ top1['profilepicfilename'] }}">
+                </a>
+                <div class="top1-infocontainer">
+                    <div class="top1-name">
+                        <a href="/profile?n={{top1['username']}}">{{ top1['name'] }}</a>
+                    </div>
+                    <div class="top1-hearts-container">
+                        <div class="top1-hearts-image-container">
+                            <img class="top1-hearts-image" src="static/pet-love-count.png">
+                        </div>
+                        
+                        <div class="top1-counts-container">
+                            <div class="top1-counts">{{ top1['loves_earned'] }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% if top2 %}
+            <div class="top-2">
+                <div class="top2-infocontainer">
+                    <div class="top2-name">
+                        <a href="/profile?n={{top2['username']}}">{{ top2['name'] }}</a>
+                    </div>
+                    <div class="top2-hearts-container">
+                        <div class="top2-hearts-image-container">
+                            <img class="top2-hearts-image" src="static/pet-love-count.png">
+                        </div>
+                        
+                        <div class="top2-counts-container">
+                            <div class="top2-counts">{{ top2['loves_earned'] }}</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="/profile?n={{top2['username']}}" class="top2-imagecontainer">
+                    <img class="top2-imageprofile" src="static/images_profiles/{{ top2['profilepicfilename'] }}">
+                </a>
+            </div>
+            {% endif %}
+            {% if top3 %}
+            <div class="top-3">
+                <a href="/profile?n={{top3['username']}}" class="top3-imagecontainer">
+                    <img class="top3-imageprofile" src="static/images_profiles/{{ top3['profilepicfilename'] }}">
+                </a>
+                <div class="top3-infocontainer">
+                    <div class="top3-name">
+                       <a href="/profile?n={{top3['username']}}">{{ top3['name'] }}</a>
+                    </div>
+                    <div class="top3-hearts-container">
+                        <div class="top3-hearts-image-container">
+                            <img class="top3-hearts-image" src="static/pet-love-count.png">
+                        </div>
+                        <div class="top3-counts-container">
+                            <div class="top3-counts">{{ top3['loves_earned'] }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <div class="description-container-lovetokens">
+                <div>Earn Love Tokens when others react to your pet's profile, showing their love and support. These tokens can be exchanged for actual money at varying rates, allowing you to monetize the affection your pet receives.</div>
+            </div>
+        </div>    
+        <div class="index-rightsection-container">
+            <div class="index-tops-header">
+                <h1>Activities</h1>
+            </div>
+            <div class="histories-container">
+                {% for activity in activities %}
+                <div class="history-box-container">
+                    <div class="history-box-top">
+                        <div class="history-box-image-container">
+                            <img class="history-box-image" src="static/images_profiles/{{ activity['user_id_pic'] }}">
+                        </div>
+                        <div class="history-box-caption-container">
+                            {% if activity['action'] == 'follow' %}
+                            <div class="history-caption-text"><strong><a href="/profile?n={{ activity['user_id_username'] }}">{{ activity['user_id_name'] }}</a></strong> has started following <strong><a href="/profile?n={{ activity['target_id_username'] }}">{{ activity['target_id_name'] }}</a></strong>.</div>
+                            {% elif activity['action'] == 'addpet' %}
+                            <div class="history-caption-text"><strong><a href="/profile?n={{ activity['user_id_username'] }}">{{ activity['user_id_name'] }}</a></strong> has added a pet named <em>{{ activity['user_id_petname'] }}</em>.</div>
+                            {% elif activity['action'] == 'givelove' %}
+                            <div class="history-caption-text"><strong><a href="/profile?n={{ activity['user_id_username'] }}">{{ activity['user_id_name'] }}</a></strong> has bestowed a token of love on one of <strong><a href="/profile?n={{ activity['target_id_username'] }}">{{ activity['target_id_name'] }}{% if activity['target_id_name'][-1] == 's' %}'{% else %}'s{% endif %}</a></strong> named <em>{{ activity['target_id_petname'] }}</em>.</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="history-box-bottom">
+                        {{ activity['time'] }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="main-container">
+        <div class="middle-section">
+            <div class="image-container">
+                <img class="welcome-image "src="static/welcomepage.png">
+            </div>
+            <div class="aboutus-container">
+                <div class="message-aboutus-container">
+                    <div class="welcoming-header">
+                        <h1>Welcome to Pet Lovers' Lounge (PLL): Your Ultimate Destination for All Things Pets!</h1>
+                    </div>
+                    <div class="welcoming-paragraph">
+                        <p>We’re thrilled you’ve found your way to our cozy corner of the internet where paws and whiskers are always in style. Whether you’re a devoted dog parent, a cat enthusiast, or someone who loves all creatures great and small, you’re in the right place!</p>
+                        <p class="second-welcome-para">Here at PPL, we celebrate every wag, purr, and chirp with enthusiasm and joy. Our goal is to create a space where fellow pet lovers can connect, share valuable tips, and exchange heartwarming stories. Dive in and explore, and let’s work together to make the most of our time with our furry, feathery, or scaly companions. After all, when it comes to our beloved pets, every moment is worth cherishing!</p>
+                    </div>
+                    <div class="button-container-welcome">
+                        <a href="/register"><button class="joinus-button">Join us today</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block main %}
+<div class="search-main-container">
+    <div class="search-data-container">
+        {% if get_data_searched %}
+        <div>
+           {{ get_data_searched | length }} result{% if get_data_searched | length == 1 %}{% else %}s {% endif %} found
+        </div>
+        {% for data in get_data_searched %}
+        <div class="search-rectangle">
+            <div class="search-top-container">
+                <div class="search-profile-pic-container">
+                    <a href="/profile?n={{ data['username'] }}"><img class="search-profile-pic" src="static/images_profiles/{{ data['profilepicfilename'] }}"></a>
+                </div>
+                <div class="search-followers-count-container">
+                    <div class="search-data-header">
+                        Followers
+                    </div>
+                    <div class="search-data-count">
+                        {{ data['followers_count'] }}
+                    </div>
+                </div>
+                <div class="search-following-count-container">
+                    <div class="search-data-header">
+                        Following
+                    </div>
+                    <div class="search-data-count">
+                        {{ data['following_count'] }}
+                    </div>
+                </div>
+                <div class="search-pet-count-container">
+                    <div class="search-data-header">
+                        Pets
+                    </div>
+                    <div class="search-data-count">
+                        {{ data['num_of_pets'] }}
+                    </div>
+                </div>
+                <div class="search-loves-earned-container">
+                    <div class="search-data-header">
+                        Loves Earned
+                    </div>
+                    <div class="search-data-count">
+                        {{ data['loves_earned'] }}
+                    </div>
+                </div>
+
+            </div>
+            <div class="search-bottom-container">
+                <div class="search-name">
+                    <a href="/profile?n={{ data['username'] }}">{{ data['name'] }}</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="search-no-result">
+        <h3>No results found.</h3>
+    </div>
+    {% endif %}
+</div>
+<hr>
+{% endblock %}

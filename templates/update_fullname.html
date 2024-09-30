@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block js %}
+<script src="static/js/update_fullname.js" defer></script>
+{% endblock %}
+
+
+{% block title %}
+    Update Name
+{% endblock %}
+
+{% block main %}
+    <div class="main-account-setup-container">
+        <div class="account-setup-container">
+            <h1>Hi {{ name }}.</h1>
+            <form id="fullname-form" action="/update_fullname" method="post">
+                <div class="update-fullname-container">
+                    <input id="form-firstname" name="firstname" type="text" placeholder="First Name">
+                    <input id="form-middleinitial"name="middlename" type="text" placeholder="Middle Initial">
+                    <input id="form-lastname" name="lastname" type="text" placeholder="Last Name">
+                    <input class="update-fullname-button" name="updatefullnamebutton" type="submit" value="Update" placeholder="Update">
+                </div>
+            </form>
+            <p {% if session.error_fullname_sc or session.error_fullname_required %} style="color: red; font-weight: bold; margin-top: 5px;"{% elif session.success_fullname %} style="color: green; font-weight: bold; margin-top: 5px;"{% endif %}>{% if session["error_fullname_sc"] %}Cannot contain special characters.{% elif session["error_fullname_required"] %}First name or/and last name cannot be empty.{% elif session["success_fullname"] %}Full name updated.{% endif %}</p>
+            <p class="update-fullname-feedback"></p>
+        </div>  
+    </div>
+{% endblock %}

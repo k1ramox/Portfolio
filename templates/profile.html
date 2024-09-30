@@ -1,0 +1,119 @@
+{% extends "layout.html" %}
+
+{% block js %}
+<script src="static/js/profile.js" defer></script>
+{% endblock %}
+
+{% block title %}
+    {% if my_own_profile %}
+        My Profile
+    {% else %}
+        {{ profile_infos["name"] }}
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    <div id="diy-flashmessage-container">
+        <p id="diy-flashmessage">Insufficient tokens! Please check your token count or <a>click here</a> to top up.</p>
+    </div>
+    <div class="profile-main-container">
+        <div class="profile-left-section">
+            <div class="profile-image-container">
+                <img class="my-profile-image" src="static/images_profiles/{{ profile_infos['profilepicfilename'] }}">
+            </div>
+            <div class="profile-name-container">
+                <h2>{{ profile_infos["name"] }}</h2>
+                {% if not my_own_profile %}
+                <div id="message-this-user">
+                    Message this user
+                </div>
+                <div class="message-modal-container-outer">
+                    <div id="message-modal-close-button">
+                        Close
+                    </div>
+                    <div class="message-feedback">
+                        Please input a message
+                    </div>
+                    <div class="message-modal-container-inner">
+                        <form id="message-form" method="post">
+                            <textarea class="message-text-area" name="text-message" type="text" autofocus placeholder="Message"></textarea>
+                            <button class="message-send-button" type="submit">Send</button>
+                        </form>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            <div class="profile-follow-info-container">
+                <div class="followers-container">
+                    <h3>Followers: <span id="followers_count">{{ profile_infos["followers_count"] }}</span></h3>
+                </div>  
+                <div class="following-container">
+                    <h3>Following: {{ profile_infos["following_count"] }}</h3>
+                </div>
+                {% if not my_own_profile %}
+                <div class="follow-button-container">
+                    <button id="follow-button-id" class="follow-button">{% if followed %}Unfollow{% else %}Follow{% endif %}</button>
+                    <input id ="follow-button-id-info" type="hidden" value="{{ profile_infos['id'] }}">
+                </div>
+                {% endif %}
+            </div>
+            <div class="profile-pet-number-container">
+                <h3>Number of pets: {{ profile_infos["num_of_pets"] }}</h3>
+            </div>
+            <div class="profile-button-setup-container">
+                {% if my_own_profile %}
+                <div class="profile-button-setup-left">
+                    <h3>Love tokens: {{ profile_infos["love_tokens"] }}</h3>
+                    <h3>Loves earned: {{ profile_infos["loves_earned"] }}</h3>
+                </div>
+                <div class="profile-button-setup-right">
+                    <button class="myprofile-setup-button"><a href="/account">Set-Up Profile</a></button>
+                </div>
+                {% else %}
+
+                    <h3>Loves earned: <span id="loves_earned_count">{{ profile_infos["loves_earned"] }}</span></h3>
+
+                {% endif %}
+            </div>
+        </div>
+        <div class="scrollable-profile-right-section">
+            <div class="grid-profile-container">
+                <div class="grid-profile-right-section">
+                    {% for info in get_pet_infos %}
+                    <div class="grids-pet-profile">
+                        <div class="pet-image-container">
+                            <img class="pet-image" src="static/images_pets/{{ info['petprofilefilename'] }}">
+                            {% if my_own_profile %}
+                            <form action="/remove_pet" method="post">
+                                <input type="hidden" name="pet_info" value="{{ info['id'] }}">
+                                <button class="remove-pet-button" type="submit">X</button>
+                            </form>
+                            {% endif %}
+                            <div class="pet-love-info-container">
+                                <img class="pet_love_image" src="static/pet-love-count.png">
+                                <div id ="{{ info['id'] }}">{{ info["reactcount"] }}</div>
+                            </div>
+                        </div>
+                        <div class="pet-name-species-container">
+                            <div class="pet-name-container">
+                                {{ info["name"] }}
+                            </div>
+                            <div class="pet-species-container">
+                                {{ info["species"] }}
+                            </div>
+                        </div>
+                        <div class="pet-give-love-container">
+                            {% if my_own_profile %}
+                                ♥
+                            {% else %}
+                                <input method="post" class="give-love-button" value="GIVE LOVE ♥" type="submit" data-extra="{{ info['id'] }}">
+                            {% endif %}
+
+                        </div>  
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+</div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sent Messages
+{% endblock %}
+
+{% block main %}
+<div class="messages-container-outer">
+    <div class="messages-container-inner">
+        <div class="messages-sidebar">
+            <a href="/messages-inbox">
+            <div class="inactive-icon-container">
+                <div class="image-inbox-container">
+                    <img class="image-messages-icon" src="static/mail-inbox-app.png">
+                </div>
+                <div class="text-inbox-container">
+                    Inbox
+                </div>
+            </div>
+            </a>
+            <div class="sent-icon-container">
+                <div class="image-inbox-container">
+                    <img class="image-messages-icon" src="static/sent-icon.png">
+                </div>
+                <div class="text-inbox-container">
+                    Sent
+                </div>
+            </div>
+        </div>
+        <div class="messages-main-container">
+            <div class="messages-list-inbox-container">
+                {% if not messages_to %}
+                    <h3>There’s nothing to show here because you haven’t sent any messages yet.</h3>
+                {% endif %}
+                {% for tos in messages_to %}
+                <a style="color: black; text-decoration: none;" href="/profile?n={{ tos['sender_username'] }}">
+                <div class="message-list-box">
+                    <div class="message-from-container">
+                        TO
+                    </div>
+                    <div class="message-list-box-middle">
+                        <div class="from-profile-container">
+                            <img class="from-profile-pic" src="static/images_profiles/{{ tos['receiver_profile_pic'] }}">
+                        </div>
+                        <div class="from-message-container">
+                            {{ tos['text_message'] }}
+                        </div>
+                    </div>
+                    <div class="message-list-box-bottom">
+                        <div class="from-name-container">
+                            <strong>{{ tos['receiver_name'] }}</strong>
+                        </div>
+                        <div class="from-date-container">
+                            {{ tos['time'] }}
+                        </div>
+                    </div>
+                </div>
+                </a>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
