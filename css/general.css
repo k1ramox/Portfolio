@@ -1,0 +1,21 @@
+* {
+    font-family: arial;
+    box-sizing: border-box;
+}
+
+
+body {
+    background-color: rgba(0, 200, 0, 0.1);
+    margin: 0px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h2 {
+    margin: 0;
+}
