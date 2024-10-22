@@ -1,8 +1,10 @@
 <?php
-
-    if (isset($_SESSION['username'])) {
-        header("Location: index.php");
-        exit();
+    function login_status() {
+        if (isset($_SESSION['id'])) {
+            return true; //logined
+            }
+        else {
+            return false; //not logined
+        }
     }
-
 ?>

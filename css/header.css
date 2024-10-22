@@ -1,5 +1,125 @@
 header {
-    height: 10vh;
+    background-color: hsl(120, 15%, 50%);
+    min-width: 320px;
+}
+
+.navbar {
+    min-height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    position: relative;
+}
+
+#feedback-below-header {
+    position: absolute;
+    bottom: -36px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    padding: 5px 10px; 
+    border-radius: 5px;
+    color: green;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.fade-out {
+    opacity: 1;
+    transition: opacity 1s ease-out;
+}
+
+.fade-out.hidden {
+    opacity: 0;
+}
+
+li {
+    list-style: none;
+}
+
+
+.nav-title {
+    font-size: 2rem;
+    text-decoration: none;
+    color: white;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+    z-index: 100;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: white;
+}
+
+.nav-link {
+    transition: 0.2s ease;
+}
+
+.nav-link:hover {
+    color: dodgerblue;
+}
+
+.hamburger {
+    cursor: pointer;
+    display: none;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: white;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+    @media (max-width: 760px) {
+        .hamburger {
+            display: block;
+        }
+        .hamburger.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .hamburger.active .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+        .nav-menu {
+            position: fixed;
+            right: -100%;
+            top: 70px;
+            bottom: 0;
+            gap: 30px;
+            flex-direction: column;
+            background-color: hsl(120, 15%, 50%);
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+        .nav-item {
+            margin: 16px 0;
+        }
+        .nav-menu.active{
+            right: 0;
+        }
+        .nav-link {
+            font-size: 20px;
+        }
+    }
+
+
+/* header {
+    height: 50vh;
     position: absolute;
     top: 0;
     right: 0;
