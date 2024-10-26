@@ -60,10 +60,25 @@ document.getElementById('shorten-another-button').addEventListener('click', func
 
 
 
-//Copy button implementation
-document.getElementById("copy-button").addEventListener('click', function(event){
+// Copy button implementation
+document.getElementById("copy-button").addEventListener('click', function(event) {
     event.preventDefault();
     let textField = document.getElementById('urlResult');
 
-    navigator.clipboard.writeText(textField.value)
+    // Check if the Clipboard API is available
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(textField.value)
+            .then(() => {
+                console.log("Text copied to clipboard!");
+            })
+            .catch(err => {
+                console.error("Failed to copy: ", err);
+            });
+    } else {
+        // Fallback for browsers that do not support the Clipboard API
+        textField.select();
+        document.execCommand("copy");
+        console.log("Fallback: Text copied to clipboard!");
+    }
 });
+

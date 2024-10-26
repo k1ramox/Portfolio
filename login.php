@@ -66,6 +66,7 @@
 
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/login.css">
+    <script src="js/login.js" defer></script>
 
     <title>URLShawty - Log In</title>
 </head>
@@ -81,10 +82,11 @@
             <?php else: ?>
                 <h2>Log in</h2>
             <?php endif; ?>
+            <p id="loginjs-feedback"></p>
             <p id="login-feedback"><?php echo $feedback ?></p>
-            <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-                <input type="text" name="username" placeholder="Username">
-                <input type="password" name="password" placeholder="Password">
+            <form id="login-form" action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+                <input id="username-field" type="text" name="username" placeholder="Username">
+                <input id="password-field" type="password" name="password" placeholder="Password">
                 <input type="submit" name="login-submit" placeholder="Password" value="Login">
             </form>
             <a href="register.php">Don't have an account?</a>

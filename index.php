@@ -32,6 +32,7 @@
 
         <div id="features-container">
             <div class="feature-box">
+            
                 <div class="feature-image-container">
                     <img class="feature-image" src="images/features-stats.png">
                 </div>

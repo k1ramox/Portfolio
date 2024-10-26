@@ -87,8 +87,8 @@
                 <input id="try-again-button" type="submit" value="TRY AGAIN">
                 
                 <div id=success-generate-random>
-                    <input id="urlResult" disabled type="text" value="" placeholder="Result">
-                    <input id="copy-button" type="button" value="COPY">
+                    <input id="urlResult" type="text" value="" placeholder="Result">
+                    <input id="copy-button" type="submit" value="COPY">
                     <input id="shorten-another-button" type="submit" value="SHORTEN ANOTHER">
                 </div>
             </form>

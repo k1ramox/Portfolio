@@ -25,7 +25,7 @@ if (basename($_SERVER['SCRIPT_FILENAME']) == 'header.php') {
                 
                 <?php if(!login_status()): ?>
                     <li>
-                        <a href="shorten-random.php" class="nav-link">Use URLShawty</a>
+                        <a href="shorten-random.php" class="nav-link">Generate Shortlinks</a>
                     </li>
                     <li>
                         <a href="index.php" class="nav-link">Get Started</a>
@@ -38,7 +38,7 @@ if (basename($_SERVER['SCRIPT_FILENAME']) == 'header.php') {
                     </li>
                 <?php else: ?>
                     <li>
-                        <a href="shorten-random.php" class="nav-link">Use URLShawty</a>
+                        <a href="shorten-random.php" class="nav-link">Generate Shortlinks</a>
                     </li>
                     <li>
                         <a href="my-urls.php" class="nav-link">My URLs</a>

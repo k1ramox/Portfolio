@@ -40,14 +40,29 @@
     //Copy button implementation
     let copyButton = document.getElementById("copy-button");
 
-    copyButton.addEventListener('click', function(event){
-        event.preventDefault();
-        let text = document.getElementById('shortlink-container').value;
-
+    copyButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    let textContainer = document.getElementById('shortlink-container');
+    
+    // Fallback for older browsers
+    if (navigator.clipboard) {
+        let text = textContainer.value;
         navigator.clipboard.writeText(text)
+            .then(() => {
+                feedbackStatus = 'copy';
+                feedbackModal(feedbackStatus);
+            })
+            .catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+    } else {
+        // Older browser fallback
+        textContainer.select();
+        document.execCommand('copy');
         feedbackStatus = 'copy';
         feedbackModal(feedbackStatus);
-    });
+    }
+});
 
     // Update row numbers
     function updateRowNumbers() {
@@ -74,6 +89,7 @@
         let i = 3;
 
         modalFeedback.textContent = `Removing in ${i}...`;
+        modalFeedback.style.color = '#f08080';
 
         let timer = setInterval(() => {
                 modalFeedback.textContent = `Removing in ${--i}...`;;

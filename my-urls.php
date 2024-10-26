@@ -74,7 +74,7 @@
                             Link: 
                         </div>
                         <div class="value">
-                            <input id="shortlink-container" disabled value="">
+                            <input id="shortlink-container" value="">
                         </div>
                     </div>
                     <div id="middle-section">
